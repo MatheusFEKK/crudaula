@@ -68,26 +68,39 @@ if ($bd){
 <body>
     <div class="container">
         <div class="box">
+            <a href="cadastro.php"><button class="btn btn-primary">Cadastrar</button></a><br><br>
             <form action="index.php" method="post">
-                <input type="text" name="nome">
+                <input type="text" name="ra">
                 <button>Enviar</button>
             </form>
             <table class="table">
                 <th scope="col">RA</th>
                 <th scope="col">Nome</th>
                 <th scope="col">E-mail</th>
+                <th scope="col">Senha</th>
                 <th scope="col">Telefone</th>
+                <th scope="col">Deletar</th>
             
             <?php
                 foreach ($aluno->readAll() as $rows){
                     echo '<tr><td>'.$rows['ra'].'</td>';
                     echo '<td>'.$rows['nome'].'</td>';
                     echo '<td>'.$rows['email'].'</td>';
-                    echo '<td>'.$rows['telefone'].'</td></tr>';
+                    echo '<td>'.$rows['senha'].'</td>';
+                    echo '<td>'.$rows['telefone'].'</td>';
+                    echo '<td><a href="funcoes.php?delete='.$rows['ra'].'<button name=delete>Deleta</button></a></td></tr>';
                 }         
-                echo 'Resultado da busca ('.$_POST['nome'].'):<br>';
-                foreach ($aluno->searchPerson($_POST['nome']) as $rowss){
-                    echo $rowss['nome'].'<br>';
+
+                if (isset($_POST['ra'])){
+                    echo 'Resultado da busca ('.$_POST['ra'].'):<br>';
+                    foreach ($aluno->searchPerson($_POST['ra']) as $rowss){
+                        echo "RA: ", $rowss['ra'], " Nome: ", $rowss['nome'], " Email: ", $rowss['email'], " Senha: ", $rowss['senha'], " Telefone: ", $rowss   
+                        
+                        
+                        
+                        ['telefone'].'<br>';
+                    }
+
                 }
 
                 
@@ -96,9 +109,6 @@ if ($bd){
             </table>
         </div>
     </div>
-
-
-
 
 </body>
 </html>
