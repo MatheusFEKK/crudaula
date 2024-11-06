@@ -2,12 +2,14 @@
 
 include_once 'configs/database.php';
 include_once 'objects/aluno.php';
+include_once'funcoes.php';
+
+index(); // Função index que esta dentro do funcoes.php
 
 $banco = new database();
 $bd = $banco->connection();
-if ($bd){
-    $aluno = new Aluno($bd); 
-}
+$aluno = new Aluno($bd); 
+global $alunos;
 
 
 
@@ -68,37 +70,37 @@ if ($bd){
 <body>
     <div class="container">
         <div class="box">
-            <a href="cadastro.php"><button class="btn btn-primary">Cadastrar</button></a><br><br>
+            <a href="cadastro.php"><button class="btn btn-info">Cadastrar</button></a><br><br>
             <form action="index.php" method="post">
                 <input type="text" name="ra">
-                <button>Enviar</button>
+                <button class="btn btn-primary">Enviar</button>
             </form>
-            <table class="table">
-                <th scope="col">RA</th>
-                <th scope="col">Nome</th>
-                <th scope="col">E-mail</th>
-                <th scope="col">Senha</th>
-                <th scope="col">Telefone</th>
-                <th scope="col">Deletar</th>
-            
             <?php
-                foreach ($aluno->readAll() as $rows){
-                    echo '<tr><td>'.$rows['ra'].'</td>';
-                    echo '<td>'.$rows['nome'].'</td>';
-                    echo '<td>'.$rows['email'].'</td>';
-                    echo '<td>'.$rows['senha'].'</td>';
-                    echo '<td>'.$rows['telefone'].'</td>';
-                    echo '<td><a href="funcoes.php?delete='.$rows['ra'].'<button name=delete>Deleta</button></a></td></tr>';
-                }         
+            if ($alunos){
+                echo '<table class="table">
+                   <th scope="col">RA</th>
+                   <th scope="col">Nome</th>
+                   <th scope="col">E-mail</th>
+                   <th scope="col">Senha</th>
+                   <th scope="col">Telefone</th>
+                   <th scope="col">Deletar</th>';
+               
+                   foreach ($alunos as $rows){
+                       echo '<tr><td>'.$rows['ra'].'</td>';
+                       echo '<td>'.$rows['nome'].'</td>';
+                       echo '<td>'.$rows['email'].'</td>';
+                       echo '<td>'.$rows['senha'].'</td>';
+                       echo '<td>'.$rows['telefone'].'</td>';
+                       echo '<td><a href="funcoes.php?delete='.$rows['ra'].'" class="btn btn-danger">DELETAR</a></td>';
+                   }
+                   echo '</tr>';         
+
+            }
 
                 if (isset($_POST['ra'])){
                     echo 'Resultado da busca ('.$_POST['ra'].'):<br>';
-                    foreach ($aluno->searchPerson($_POST['ra']) as $rowss){
-                        echo "RA: ", $rowss['ra'], " Nome: ", $rowss['nome'], " Email: ", $rowss['email'], " Senha: ", $rowss['senha'], " Telefone: ", $rowss   
-                        
-                        
-                        
-                        ['telefone'].'<br>';
+                    foreach ($aluno->searchPerson($_POST['ra']) as $info_user){
+                        echo "RA: ", $info_user['ra'], " Nome: ", $info_user['nome'], " Email: ", $info_user['email'], " Senha: ", $info_user['senha'], " Telefone: ", $info_user['telefone'].'<br>';
                     }
 
                 }

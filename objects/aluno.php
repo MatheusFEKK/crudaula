@@ -24,7 +24,7 @@
         }
 
         public function searchPerson($ra){
-            $sql = "SELECT * FROM aluno WHERE ra = :ra;";
+            $sql = "SELECT * FROM aluno WHERE ra = :ra";
             $resultado = $this->bd->prepare($sql);
             $resultado->bindParam(':ra', $ra);
             $resultado->execute();
@@ -48,10 +48,15 @@
 
         }
 
-        public function delete($delete){
+        public function delete(){
             $sql = "DELETE FROM aluno where ra = :ra";
-            $stat = $this->bd->prepare();
+            $stat = $this->bd->prepare($sql);
             $stat->bindParam(":ra", $this->ra);
-            $stat->execute();
+
+            if ($stat->execute()){
+                return true;
+            }else {
+                return false;
+            }
         }
     }

@@ -5,6 +5,15 @@
     $banco = new database();
     $db = $banco->connection();
     $aluno = new Aluno($db);
+    $alunos = null;
+
+    function index(){
+        global $alunos;
+        $banco = new database();
+        $db = $banco->connection();
+        $aluno = new Aluno($db);
+        $alunos = $aluno->readAll();
+    }
 
     if (isset($_POST['cadastrar'])){
         $aluno->nome = $_POST['nome'];
@@ -16,9 +25,9 @@
         }
     }
 
-
     if (isset($_GET['delete'])){
-        if($aluno->delete($_GET['delete'])){
+        $aluno->ra = $_GET['delete'];
+        if($aluno->delete()){
             header('Location: index.php');
         }
     }
