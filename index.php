@@ -92,6 +92,7 @@ global $alunos;
                        echo '<td>'.$rows['senha'].'</td>';
                        echo '<td>'.$rows['telefone'].'</td>';
                        echo '<td><a href="funcoes.php?delete='.$rows['ra'].'" class="btn btn-danger">DELETAR</a></td>';
+                       echo '<td><a href="editar.php?changing='.$rows['ra'].'" class="btn btn-primary">EDITAR</a></td>';
                    }
                    echo '</tr>';         
 

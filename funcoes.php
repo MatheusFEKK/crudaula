@@ -31,3 +31,14 @@
             header('Location: index.php');
         }
     }
+
+    if (isset($_GET['editar'])){
+        $aluno->ra = $_GET['ra'];
+        $aluno->nome = $_GET['nome_edit'];
+        $aluno->email = $_GET['email_edit'];
+        $aluno->telefone = $_GET['telefone_edit'];
+        $aluno->senha = $_GET['senha_edit'];
+        if ($aluno->editar()){
+            header('Location: index.php');
+        }
+    }

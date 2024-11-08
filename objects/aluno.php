@@ -59,4 +59,20 @@
                 return false;
             }
         }
+
+        public function editar(){
+            $sql = "UPDATE aluno SET nome = :nome, email = :email, senha = :senha, telefone = :telefone where ra = :ra";
+            $stat = $this->bd->prepare($sql);
+            $stat->bindParam(":nome", $this->nome);
+            $stat->bindParam(":email",$this->email);
+            $stat->bindParam(":telefone",$this->telefone);
+            $stat->bindParam(":senha",$this->senha);
+            $stat->bindParam(":ra",$this->ra);
+            if($stat->execute()){
+                return true;
+            }else {
+                return false;
+            }
+            
+        }
     }
