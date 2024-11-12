@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+input {
+    border-radius: 0.5rem;
+    border: none;
+    padding: 0.3rem;
+    margin-top: 1rem;
+}
+
+button{
+    float: right;
+    margin-top: 2rem;
+}

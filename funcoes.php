@@ -32,12 +32,12 @@
         }
     }
 
-    if (isset($_GET['editar'])){
-        $aluno->ra = $_GET['ra'];
-        $aluno->nome = $_GET['nome_edit'];
-        $aluno->email = $_GET['email_edit'];
-        $aluno->telefone = $_GET['telefone_edit'];
-        $aluno->senha = $_GET['senha_edit'];
+    if (isset($_POST['editar'])){
+        $aluno->ra = $_POST['ra'];
+        $aluno->nome = $_POST['nome_edit'];
+        $aluno->email = $_POST['email_edit'];
+        $aluno->telefone = $_POST['telefone_edit'];
+        $aluno->senha = $_POST['senha_edit'];
         if ($aluno->editar()){
             header('Location: index.php');
         }
